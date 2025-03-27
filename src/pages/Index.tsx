@@ -1,9 +1,11 @@
 
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import CryptoCategory from '../components/CryptoCategory';
+import { getAlgorithmsByCategory } from '../data/algorithms';
 
 const Index: React.FC = () => {
   useEffect(() => {
@@ -11,30 +13,29 @@ const Index: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const classicCryptography = [
-    { id: 1, title: 'Caesar' },
-    { id: 2, title: 'Mã cặp playfair' },
-    { id: 3, title: 'Mã đa bảng chữ - VIGENERE CIPHER' },
-    { id: 4, title: 'Mã hoán vị' },
-  ];
+  const classicCryptography = getAlgorithmsByCategory('classic').map((algo, index) => ({
+    id: index + 1,
+    title: algo.title,
+    linkId: algo.id
+  }));
 
-  const modernCryptography = [
-    { id: 1, title: 'Thuật toán sinh khóa con cho mỗi vòng lặp' },
-    { id: 2, title: 'Thuật toán mã hóa' },
-  ];
+  const modernCryptography = getAlgorithmsByCategory('modern').map((algo, index) => ({
+    id: index + 1,
+    title: algo.title,
+    linkId: algo.id
+  }));
 
-  const numberTheory = [
-    { id: 1, title: 'Tính lũy thừa modulo' },
-    { id: 2, title: 'Giải hệ phương trình đồng dư' },
-    { id: 3, title: 'Căn nguyên thủy và logarit rời rạc' },
-  ];
+  const numberTheory = getAlgorithmsByCategory('number-theory').map((algo, index) => ({
+    id: index + 1,
+    title: algo.title,
+    linkId: algo.id
+  }));
 
-  const publicKeyCryptography = [
-    { id: 1, title: 'Trao đổi khóa Diffie-Hellman' },
-    { id: 2, title: 'Thuật toán RSA' },
-    { id: 3, title: 'Hệ mật mã ElGamma' },
-    { id: 4, title: 'CHỮ KÝ ĐIỆN TỬ DSA' },
-  ];
+  const publicKeyCryptography = getAlgorithmsByCategory('public-key').map((algo, index) => ({
+    id: index + 1,
+    title: algo.title,
+    linkId: algo.id
+  }));
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -75,10 +76,75 @@ const Index: React.FC = () => {
         </motion.div>
         
         <div className="max-w-4xl mx-auto">
-          <CryptoCategory title="MÃ HÓA CỔ ĐIỂN" items={classicCryptography} delay={0} />
-          <CryptoCategory title="MÃ HÓA HIỆN ĐẠI DES, AES" items={modernCryptography} delay={1} />
-          <CryptoCategory title="LÝ THUYẾT SỐ" items={numberTheory} delay={2} />
-          <CryptoCategory title="MÃ HÓA KHÓA CÔNG KHAI – XÁC THỰC- CHỮ KÝ SỐ" items={publicKeyCryptography} delay={3} />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-8 bg-card rounded-xl p-6 shadow-sm border"
+          >
+            <h2 className="text-xl font-semibold mb-4">Chào mừng đến với ứng dụng ôn tập Mật mã học</h2>
+            <p className="text-muted-foreground mb-4">
+              Ứng dụng này cung cấp các công cụ và kiến thức để học tập và thực hành các thuật toán mã hóa. 
+              Bạn có thể xem chi tiết về từng thuật toán và thử nghiệm chúng trực tiếp.
+            </p>
+            <div className="p-4 bg-primary/10 rounded-lg">
+              <p className="font-medium text-primary">
+                Chọn một thuật toán từ danh sách bên dưới để bắt đầu thử nghiệm.
+              </p>
+            </div>
+          </motion.div>
+          
+          <CryptoCategory 
+            title="MÃ HÓA CỔ ĐIỂN" 
+            items={classicCryptography.map(item => ({
+              id: item.id,
+              title: (
+                <Link to={`/algorithm/${item.linkId}`} className="hover:underline">
+                  {item.title}
+                </Link>
+              )
+            }))}
+            delay={0} 
+          />
+          
+          <CryptoCategory 
+            title="MÃ HÓA HIỆN ĐẠI DES, AES" 
+            items={modernCryptography.map(item => ({
+              id: item.id,
+              title: (
+                <Link to={`/algorithm/${item.linkId}`} className="hover:underline">
+                  {item.title}
+                </Link>
+              )
+            }))}
+            delay={1} 
+          />
+          
+          <CryptoCategory 
+            title="LÝ THUYẾT SỐ" 
+            items={numberTheory.map(item => ({
+              id: item.id,
+              title: (
+                <Link to={`/algorithm/${item.linkId}`} className="hover:underline">
+                  {item.title}
+                </Link>
+              )
+            }))}
+            delay={2} 
+          />
+          
+          <CryptoCategory 
+            title="MÃ HÓA KHÓA CÔNG KHAI – XÁC THỰC- CHỮ KÝ SỐ" 
+            items={publicKeyCryptography.map(item => ({
+              id: item.id,
+              title: (
+                <Link to={`/algorithm/${item.linkId}`} className="hover:underline">
+                  {item.title}
+                </Link>
+              )
+            }))}
+            delay={3} 
+          />
         </div>
       </main>
       <Footer />

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 interface CryptoListItemProps {
   number: string | number;
-  title: string;
+  title: string | React.ReactNode;
   delay?: number;
 }
 
