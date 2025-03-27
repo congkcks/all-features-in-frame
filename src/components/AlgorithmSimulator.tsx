@@ -6,6 +6,9 @@ import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { processCaesar } from '@/lib/algorithms/caesar';
 import { processPlayfair } from '@/lib/algorithms/playfair';
+import { processVigenere, processVigenereAutokey } from '@/lib/algorithms/vigenere';
+import { processMonoalphabetic } from '@/lib/algorithms/monoalphabetic';
+import { processTransposition } from '@/lib/algorithms/transposition';
 
 interface AlgorithmSimulatorProps {
   algorithmId: string;
@@ -43,11 +46,57 @@ const AlgorithmSimulator: React.FC<AlgorithmSimulatorProps> = ({ algorithmId }) 
           result = processPlayfair({ ciphertext, key }, 'decrypt');
         }
         break;
+      case 'vigenere':
+        if (currentTab === 'encrypt') {
+          result = processVigenere({ plaintext, key }, 'encrypt');
+        } else {
+          result = processVigenere({ ciphertext, key }, 'decrypt');
+        }
+        break;
+      case 'vigenere-autokey':
+        if (currentTab === 'encrypt') {
+          result = processVigenereAutokey({ plaintext, key }, 'encrypt');
+        } else {
+          result = processVigenereAutokey({ ciphertext, key }, 'decrypt');
+        }
+        break;
+      case 'monoalphabetic':
+        if (currentTab === 'encrypt') {
+          result = processMonoalphabetic({ plaintext, key }, 'encrypt');
+        } else {
+          result = processMonoalphabetic({ ciphertext, key }, 'decrypt');
+        }
+        break;
+      case 'transposition':
+        if (currentTab === 'encrypt') {
+          result = processTransposition({ plaintext, key }, 'encrypt');
+        } else {
+          result = processTransposition({ ciphertext, key }, 'decrypt');
+        }
+        break;
       default:
         result = { result: 'Thuật toán chưa được triển khai', steps: [] };
     }
 
     setOutput(result);
+  };
+
+  const getKeyPlaceholder = () => {
+    switch (algorithmId) {
+      case 'caesar':
+        return 'Nhập độ dịch (số)';
+      case 'vigenere':
+      case 'vigenere-autokey':
+        return 'Nhập từ khóa (chuỗi chữ cái)';
+      case 'playfair':
+        return 'Nhập từ khóa (chuỗi chữ cái)';
+      case 'monoalphabetic':
+        return 'Nhập bảng thay thế (26 chữ cái)';
+      case 'transposition':
+        return 'Nhập độ sâu (số)';
+      default:
+        return 'Nhập khóa';
+    }
   };
 
   return (
@@ -64,7 +113,7 @@ const AlgorithmSimulator: React.FC<AlgorithmSimulatorProps> = ({ algorithmId }) 
             <Input 
               value={key}
               onChange={(e) => setKey(e.target.value)}
-              placeholder={algorithmId === 'caesar' ? "Nhập độ dịch (số)" : "Nhập khóa"}
+              placeholder={getKeyPlaceholder()}
               className="w-full"
             />
           </div>
@@ -85,7 +134,7 @@ const AlgorithmSimulator: React.FC<AlgorithmSimulatorProps> = ({ algorithmId }) 
             <Input 
               value={key}
               onChange={(e) => setKey(e.target.value)}
-              placeholder={algorithmId === 'caesar' ? "Nhập độ dịch (số)" : "Nhập khóa"}
+              placeholder={getKeyPlaceholder()}
               className="w-full"
             />
           </div>

@@ -4,25 +4,37 @@ import { Algorithm } from '../types/algorithm';
 export const algorithms: Algorithm[] = [
   {
     id: 'caesar',
-    title: 'Caesar',
+    title: 'Mật mã Caesar',
     description: 'Mã hóa Caesar là phương pháp mã hóa thay thế đơn giản, trong đó mỗi chữ cái trong văn bản gốc được thay thế bằng một chữ cái cách nó một khoảng cố định trong bảng chữ cái.',
     category: 'classic'
   },
   {
     id: 'playfair',
-    title: 'Mã cặp playfair',
+    title: 'Mã cặp Playfair',
     description: 'Mã hóa Playfair sử dụng ma trận 5x5 của các chữ cái được sắp xếp dựa trên một từ khóa. Đây là một trong những mã hóa thay thế đầu tiên hoạt động trên các cặp chữ cái.',
     category: 'classic'
   },
   {
     id: 'vigenere',
-    title: 'Mã đa bảng chữ - VIGENERE CIPHER',
-    description: 'Mã Vigenere là một phương pháp mã hóa văn bản bằng cách sử dụng một loạt các phép mã hóa Caesar khác nhau dựa trên các chữ cái của một từ khóa.',
+    title: 'Mật mã Vigenere - Khóa lặp',
+    description: 'Mã Vigenere là một phương pháp mã hóa văn bản bằng cách sử dụng một loạt các phép mã hóa Caesar khác nhau dựa trên các chữ cái của một từ khóa lặp lại.',
+    category: 'classic'
+  },
+  {
+    id: 'vigenere-autokey',
+    title: 'Mật mã Vigenere - Autokey',
+    description: 'Biến thể của mã Vigenere, sử dụng bản rõ làm phần mở rộng của khóa thay vì lặp lại khóa ban đầu.',
+    category: 'classic'
+  },
+  {
+    id: 'monoalphabetic',
+    title: 'Mã hóa chữ đơn',
+    description: 'Mã hóa thay thế đơn bảng chữ cái trong đó mỗi chữ cái trong bảng chữ cái được thay thế bằng một chữ cái cố định khác.',
     category: 'classic'
   },
   {
     id: 'transposition',
-    title: 'Mã hoán vị',
+    title: 'Mật mã hoán vị',
     description: 'Mã hoán vị hoạt động bằng cách thay đổi vị trí các ký tự trong thông điệp mà không làm thay đổi chính các ký tự.',
     category: 'classic'
   },
@@ -70,7 +82,7 @@ export const algorithms: Algorithm[] = [
   },
   {
     id: 'elgamal',
-    title: 'Hệ mật mã ElGamma',
+    title: 'Hệ mật mã ElGamal',
     description: 'Hệ mật mã ElGamal dựa trên vấn đề logarit rời rạc và có thể được sử dụng cho cả mã hóa và chữ ký số.',
     category: 'public-key'
   },

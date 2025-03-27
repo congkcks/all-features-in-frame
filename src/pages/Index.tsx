@@ -15,25 +15,25 @@ const Index: React.FC = () => {
 
   const classicCryptography = getAlgorithmsByCategory('classic').map((algo, index) => ({
     id: index + 1,
-    title: algo.title,
+    title: <Link to={`/algorithm/${algo.id}`} className="hover:underline">{algo.title}</Link> as unknown as string,
     linkId: algo.id
   }));
 
   const modernCryptography = getAlgorithmsByCategory('modern').map((algo, index) => ({
     id: index + 1,
-    title: algo.title,
+    title: <Link to={`/algorithm/${algo.id}`} className="hover:underline">{algo.title}</Link> as unknown as string,
     linkId: algo.id
   }));
 
   const numberTheory = getAlgorithmsByCategory('number-theory').map((algo, index) => ({
     id: index + 1,
-    title: algo.title,
+    title: <Link to={`/algorithm/${algo.id}`} className="hover:underline">{algo.title}</Link> as unknown as string,
     linkId: algo.id
   }));
 
   const publicKeyCryptography = getAlgorithmsByCategory('public-key').map((algo, index) => ({
     id: index + 1,
-    title: algo.title,
+    title: <Link to={`/algorithm/${algo.id}`} className="hover:underline">{algo.title}</Link> as unknown as string,
     linkId: algo.id
   }));
 
@@ -96,53 +96,25 @@ const Index: React.FC = () => {
           
           <CryptoCategory 
             title="MÃ HÓA CỔ ĐIỂN" 
-            items={classicCryptography.map(item => ({
-              id: item.id,
-              title: (
-                <Link to={`/algorithm/${item.linkId}`} className="hover:underline">
-                  {item.title}
-                </Link>
-              )
-            }))}
+            items={classicCryptography}
             delay={0} 
           />
           
           <CryptoCategory 
             title="MÃ HÓA HIỆN ĐẠI DES, AES" 
-            items={modernCryptography.map(item => ({
-              id: item.id,
-              title: (
-                <Link to={`/algorithm/${item.linkId}`} className="hover:underline">
-                  {item.title}
-                </Link>
-              )
-            }))}
+            items={modernCryptography}
             delay={1} 
           />
           
           <CryptoCategory 
             title="LÝ THUYẾT SỐ" 
-            items={numberTheory.map(item => ({
-              id: item.id,
-              title: (
-                <Link to={`/algorithm/${item.linkId}`} className="hover:underline">
-                  {item.title}
-                </Link>
-              )
-            }))}
+            items={numberTheory}
             delay={2} 
           />
           
           <CryptoCategory 
             title="MÃ HÓA KHÓA CÔNG KHAI – XÁC THỰC- CHỮ KÝ SỐ" 
-            items={publicKeyCryptography.map(item => ({
-              id: item.id,
-              title: (
-                <Link to={`/algorithm/${item.linkId}`} className="hover:underline">
-                  {item.title}
-                </Link>
-              )
-            }))}
+            items={publicKeyCryptography}
             delay={3} 
           />
         </div>
